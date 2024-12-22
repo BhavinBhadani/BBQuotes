@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Tab("Breakig Bad", systemImage: "tortoise") {
-                Text("Breaking Bad View")
+            Tab("Breaking Bad", systemImage: "tortoise") {
+                QuoteView(show: "Breaking Bad")
                     .toolbarBackgroundVisibility(.visible, for: .tabBar)
             }
             
             Tab("Better call Saul", systemImage: "briefcase") {
-                Text("Better call Saul View")
+                QuoteView(show: "Better call Saul View")
                     .toolbarBackgroundVisibility(.visible, for: .tabBar)
             }
         }
