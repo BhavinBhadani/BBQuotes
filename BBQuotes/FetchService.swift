@@ -32,7 +32,7 @@ struct FetchService {
     }
     
     func fetchCharacter(from name: String) async throws -> Character {
-        let charcterURL = baseURL.appending(path: "charcaters")
+        let charcterURL = baseURL.appending(path: "characters")
         let fetchURL = charcterURL.appending(queryItems: [
             URLQueryItem(name: "name", value: name)
         ])
