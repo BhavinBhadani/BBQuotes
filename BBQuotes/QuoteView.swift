@@ -12,10 +12,12 @@ struct QuoteView: View {
     let vm = ViewModel()
     let show: String
     
+    @State var showCharcaterInfo = false
+    
     var body: some View {
         GeometryReader { proxy in
             ZStack {
-                Image(show.lowercased().replacingOccurrences(of: " ", with: ""))
+                Image(show.removeCaseAndSpace())
                     .resizable()
                     .frame(width: proxy.size.width * 2.7, height: proxy.size.height * 1.2)
                 
@@ -26,8 +28,10 @@ struct QuoteView: View {
                         switch vm.status {
                         case .notStarted:
                             EmptyView()
+                            
                         case .fetching:
                             ProgressView()
+                            
                         case .success:
                             Text("\"\(vm.quote.quote)\"")
                                 .minimumScaleFactor(0.5)
@@ -56,6 +60,10 @@ struct QuoteView: View {
                             }
                             .frame(width: proxy.size.width / 1.1, height: proxy.size.height / 1.8)
                             .clipShape(.rect(cornerRadius: 50))
+                            .onTapGesture {
+                                showCharcaterInfo.toggle()
+                            }
+                            
                         case .failed(let error):
                             Text(String(describing: error))
                         }
@@ -72,9 +80,9 @@ struct QuoteView: View {
                             .font(.title)
                             .foregroundStyle(.white)
                             .padding()
-                            .background(Color("\(show.replacingOccurrences(of: " ", with: ""))Button"))
+                            .background(Color("\(show.removeSpaces())Button"))
                             .clipShape(.rect(cornerRadius: 8))
-                            .shadow(color: Color("\(show.replacingOccurrences(of: " ", with: ""))Shadow"), radius: 2)
+                            .shadow(color: Color("\(show.removeSpaces())Shadow"), radius: 2)
                     }
                     
                     Spacer(minLength: 95)
@@ -84,10 +92,13 @@ struct QuoteView: View {
             .frame(width: proxy.size.width, height: proxy.size.height)
         }
         .ignoresSafeArea()
+        .sheet(isPresented: $showCharcaterInfo) {
+            CharacterView(character: vm.character, show: show)
+        }
     }
 }
 
 #Preview {
-    QuoteView(show: "Breaking Bad")
+    QuoteView(show: Constants.breakingBad)
         .preferredColorScheme(.dark)
 }
