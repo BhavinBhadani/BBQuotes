@@ -11,17 +11,17 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab(Constants.breakingBad, systemImage: "tortoise") {
-                QuoteView(show: Constants.breakingBad)
+                FetchView(show: Constants.breakingBad)
                     .toolbarBackgroundVisibility(.visible, for: .tabBar)
             }
             
             Tab(Constants.betterCallSaul, systemImage: "briefcase") {
-                QuoteView(show: Constants.betterCallSaul)
+                FetchView(show: Constants.betterCallSaul)
                     .toolbarBackgroundVisibility(.visible, for: .tabBar)
             }
             
             Tab(Constants.elCamino, systemImage: "car") {
-                QuoteView(show: Constants.elCamino)
+                FetchView(show: Constants.elCamino)
                     .toolbarBackgroundVisibility(.visible, for: .tabBar)
             }
         }
